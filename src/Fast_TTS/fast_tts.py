@@ -11,7 +11,7 @@ class FastTTS:
             print('Text: ', text)
 
             if use_tortoise:
-                tortoise.create_audio(text, 'autoregressive_model', 'diffusion_model', 'tokenizer_json', 'voice_dir','result_dir',delimiter)
+                tortoise.create_audio(text,"C:\\backend_server\\ServerFiles\\Speakers\\Drinker","C:\\Users\\Mathieu\\Desktop",delimiter)
 
 
         except Exception as e:
@@ -23,4 +23,4 @@ class FastTTS:
 
 
 
-FastTTS.fast_tts('Hello World!')
+FastTTS.fast_tts('Hello World! This is the ultimate test of the Fast TTS! I hope it works! Thank you!')
