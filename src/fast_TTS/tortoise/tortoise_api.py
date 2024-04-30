@@ -6,6 +6,7 @@ from huggingface_hub import hf_hub_download
 import os
 import torchaudio
 import torch
+from datetime import datetime
 
 def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top_p=0.8, diffusion_temperature=1, length_penalty=1, repetition_penalty=2, cond_free_k=2, 
                  num_autoregressive_samples=16, sample_batch_size=1, diffusion_iterations=30, voice_samples=None, conditioning_latents=None, use_deterministic_seed=None, 
@@ -17,9 +18,11 @@ def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top
         print('\tVoice Directory: ', voice_dir)
         print('\tResult Directory: ', result_dir)
 
-
-        filename = f"{result_dir}/test"
-
+        speaker = voice_dir.split('\\')[-1]
+        speaker_dir = voice_dir.split('\\')[0:-1]
+        speaker_dir = '\\'.join(speaker_dir)
+        
+        filename = f"{result_dir}/{speaker}_{datetime.now().timestamp()}"
 
         # Perform the preprocessing checks
         preprocessing_checks()
@@ -72,7 +75,7 @@ def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top
         print('Loading the voice samples and creating the conditioning latents')
 
 
-        voice_samples, confitioning_latents = load_voice(voice='Drinker', extra_voice_dirs=["C:\\backend_server\ServerFiles\Speakers"], model_hash=tts.autoregressive_model_hash)
+        voice_samples, confitioning_latents = load_voice(voice=speaker, extra_voice_dirs=[speaker_dir], model_hash=tts.autoregressive_model_hash)
 
         settings['voice_samples'] = voice_samples
         settings['conditioning_latents'] = conditioning_latents
@@ -91,9 +94,9 @@ def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top
 
             for j, g in enumerate(gen):
                 audio = g.squeeze(0).cpu()
-                name = f"{filename}_{i}"
+                name = f"{filename}_{i}.wav"
 
-                torchaudio.save(f"{name}.wav", audio, tts.output_sample_rate)
+                torchaudio.save(name, audio, tts.output_sample_rate)
 
         # Combine the audio sections into a single audio file
         print('Combining the audio sections into a single audio file')
@@ -116,13 +119,11 @@ def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top
 
         print("Cleaning up...")
         for i, cut_text in enumerate(text_sections):
-            name = str(filename)+'_'+str(i)
-            os.remove(f'{name}.wav')    
+            name = f"{filename}_{i}.wav"
+            os.remove(name)    
 
     except Exception as e:
         print('Error in Tortoise TTS: ', e)
-
-
 
 def preprocessing_checks():
     try:
