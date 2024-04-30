@@ -4,8 +4,8 @@ with open('README.md', 'r') as f:
     description = f.read()
 
 setup(
-    name='fast-tts',
-    version='0.0.1',
+    name='fast_tts',
+    version='0.0.2',
     long_description=description,
     long_description_content_type='text/markdown',
     packages=find_packages(),
