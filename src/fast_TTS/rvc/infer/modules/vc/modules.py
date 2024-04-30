@@ -8,15 +8,15 @@ import soundfile as sf
 import torch
 from io import BytesIO
 
-from rvc_service.infer.lib.audio import load_audio, wav2
-from rvc_service.infer.lib.infer_pack.models import (
+from rvc.infer.lib.audio import load_audio, wav2
+from rvc.infer.lib.infer_pack.models import (
     SynthesizerTrnMs256NSFsid,
     SynthesizerTrnMs256NSFsid_nono,
     SynthesizerTrnMs768NSFsid,
     SynthesizerTrnMs768NSFsid_nono,
 )
-from rvc_service.infer.modules.vc.pipeline import Pipeline
-from rvc_service.infer.modules.vc.utils import *
+from rvc.infer.modules.vc.pipeline import Pipeline
+from rvc.infer.modules.vc.utils import *
 
 
 class VC:
@@ -96,10 +96,13 @@ class VC:
                 "",
                 "",
             )
-        person = f'{os.getenv("weight_root")}{sid}'
+        person = f'{sid}'
         logger.info(f"Loading: {person}")
 
         self.cpt = torch.load(person, map_location="cpu")
+
+        print(type(self.cpt))
+
         self.tgt_sr = self.cpt["config"][-1]
         self.cpt["config"][-3] = self.cpt["weight"]["emb_g.weight"].shape[0]  # n_spk
         self.if_f0 = self.cpt.get("f0", 1)

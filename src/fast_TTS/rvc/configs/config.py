@@ -10,7 +10,7 @@ try:
     import intel_extension_for_pytorch as ipex  # pylint: disable=import-error, unused-import
 
     if torch.xpu.is_available():
-        from rvc_service.infer.modules.ipex import ipex_init
+        from rvc.infer.modules.ipex import ipex_init
 
         ipex_init()
 except Exception:  # pylint: disable=broad-exception-caught
@@ -64,7 +64,7 @@ class Config:
     def load_config_json() -> dict:
         d = {}
         for config_file in version_config_list:
-            with open(f"rvc_service/configs/{config_file}", "r") as f:
+            with open(f"rvc/configs/{config_file}", "r") as f:
                 d[config_file] = json.load(f)
         return d
 

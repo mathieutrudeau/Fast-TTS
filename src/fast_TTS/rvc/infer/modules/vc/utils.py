@@ -9,7 +9,7 @@ def get_index_path_from_model(sid):
             f
             for f in [
                 os.path.join(root, name)
-                for root, _, files in os.walk(os.getenv("index_root"), topdown=False)
+                for root, _, files in os.walk("", topdown=False)
                 for name in files
                 if name.endswith(".index") and "trained" not in name
             ]
@@ -21,7 +21,7 @@ def get_index_path_from_model(sid):
 
 def load_hubert(config):
     models, _, _ = checkpoint_utils.load_model_ensemble_and_task(
-        ["ServerFiles/Speakers/hubert_base.pt"],
+        ["data/hubert_base.pt"],
         suffix="",
     )
     hubert_model = models[0]

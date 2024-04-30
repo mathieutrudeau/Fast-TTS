@@ -22,7 +22,7 @@ def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top
         speaker_dir = voice_dir.split('\\')[0:-1]
         speaker_dir = '\\'.join(speaker_dir)
         
-        filename = f"{result_dir}/{speaker}_{datetime.now().timestamp()}"
+        filename = f"{result_dir}/{speaker}_{str(datetime.now().timestamp()).replace('.','')}"
 
         # Perform the preprocessing checks
         preprocessing_checks()
@@ -121,6 +121,8 @@ def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top
         for i, cut_text in enumerate(text_sections):
             name = f"{filename}_{i}.wav"
             os.remove(name)    
+
+        return f"{filename}.wav"
 
     except Exception as e:
         print('Error in Tortoise TTS: ', e)

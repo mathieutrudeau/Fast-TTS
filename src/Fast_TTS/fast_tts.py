@@ -1,5 +1,6 @@
 import os
 import tortoise.tortoise_api as tortoise
+import rvc.rvc_api as rvc
 
 class FastTTS:
 
@@ -14,10 +15,10 @@ class FastTTS:
 
             result_dir = f"C:\\Users\\Mathieu\\Desktop"
 
-            tortoise.create_audio(text,voice_dir,result_dir,delimiter)
+            audio_path = tortoise.create_audio(text,voice_dir,result_dir,delimiter)
 
             
-
+            rvc.clone_voice(voice_dir, audio_path)
 
 
 
