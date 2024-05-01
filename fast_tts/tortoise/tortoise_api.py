@@ -2,7 +2,6 @@ from fast_tts.tortoise.api_fast import TextToSpeech as Tortoise_TTS_Hifi
 from fast_tts.tortoise.utils.text import split_and_recombine_text
 from fast_tts.tortoise.utils.audio import load_audio,load_voice
 
-from huggingface_hub import hf_hub_download
 import os
 import torchaudio
 import torch
@@ -23,9 +22,6 @@ def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top
         speaker_dir = '\\'.join(speaker_dir)
         
         filename = f"{result_dir}/{speaker}_{str(datetime.now().timestamp()).replace('.','')}"
-
-        # Perform the preprocessing checks
-        preprocessing_checks()
 
         # Loading the TTS model
         print('Loading the TTS model')
@@ -127,44 +123,3 @@ def create_audio(text, voice_dir, result_dir, delimiter='', temperature=0.2, top
     except Exception as e:
         print('Error in Tortoise TTS: ', e)
 
-def preprocessing_checks():
-    try:
-        print('Preprocessing Checks')
-
-        # Check if the autoregressive model exists
-        print('Checking if the autoregressive model exists')
-
-        if not os.path.exists(f"{os.getcwd()}/data/autoregressive.pth"):
-            print('Autoregressive Model does not exist')
-            print(f"{os.getcwd()}/data/autoregressive.pth")
-            print('Downloading the autoregressive model')
-            hf_hub_download(repo_id="Awaazo/FastTTS", repo_type="model", filename="autoregressive.pth", local_dir=f"{os.getcwd()}/data", local_dir_use_symlinks=False)
-        else:
-            print('Autoregressive Model exists') 
-
-        # Check if the tokenizer JSON exists
-        print('Checking if the tokenizer JSON exists')
-
-        if not os.path.exists(f"{os.getcwd()}/data/tokenizer.json"):
-            print('Tokenizer JSON does not exist')
-            print(f"{os.getcwd()}/data/tokenizer.json")
-            print('Downloading the tokenizer JSON')
-            hf_hub_download(repo_id="Awaazo/FastTTS", repo_type="model", filename="tokenizer.json", local_dir=f"{os.getcwd()}/data", local_dir_use_symlinks=False)
-        else:
-            print('Tokenizer JSON exists')
-
-        # Check if the hifi-gan decoder exists
-        print('Checking if the hifi-gan decoder exists')
-
-        if not os.path.exists(f"{os.getcwd()}/data/hifidecoder.pth"):
-            print('Hifi-GAN Decoder does not exist')
-            print(f"{os.getcwd()}/data/hifidecoder.pth")
-            print('Downloading the hifi-gan decoder')
-            hf_hub_download(repo_id="Awaazo/FastTTS", repo_type="model", filename="hifidecoder.pth", local_dir=f"{os.getcwd()}/data", local_dir_use_symlinks=False)
-        else:
-            print('Hifi-GAN Decoder exists')
-
-
-        
-    except Exception as e:
-        print('Error in Preprocessing Checks: ', e)

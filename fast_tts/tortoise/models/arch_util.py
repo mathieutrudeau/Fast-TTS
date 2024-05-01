@@ -289,7 +289,7 @@ class AudioMiniEncoder(nn.Module):
         return h[:, :, 0]
 
 
-DEFAULT_MEL_NORM_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data/mel_norms.pth')
+DEFAULT_MEL_NORM_FILE = f"{os.getcwd()}/data/mel_norms.pth"
 
 
 class TorchMelSpectrogram(nn.Module):

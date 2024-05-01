@@ -32,7 +32,7 @@ setup(
         'inflect',
         'unidecode',
         'psutil',
-        'av',
+        'av<=11.0.0',
         'faiss-cpu',
         'praat-parselmouth>=0.4.2',
         'pyworld',
