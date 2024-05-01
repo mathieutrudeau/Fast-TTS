@@ -1,5 +1,5 @@
-from rvc.configs.config import Config
-from rvc.infer.modules.vc.modules import VC
+from fast_tts.rvc.configs.config import Config
+from fast_tts.rvc.infer.modules.vc.modules import VC
 from scipy.io import wavfile
 import os
 from huggingface_hub import hf_hub_download

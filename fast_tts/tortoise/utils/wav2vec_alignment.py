@@ -4,10 +4,10 @@ import torch
 import torchaudio
 from transformers import Wav2Vec2ForCTC, Wav2Vec2FeatureExtractor, Wav2Vec2CTCTokenizer, Wav2Vec2Processor
 
-from tortoise.utils.audio import load_audio
-from tortoise.utils.device import get_device
+from fast_tts.tortoise.utils.audio import load_audio
+from fast_tts.tortoise.utils.device import get_device
 
-import tortoise.utils.torch_intermediary as ml
+import fast_tts.tortoise.utils.torch_intermediary as ml
 
 def max_alignment(s1, s2, skip_character='~', record=None):
     """

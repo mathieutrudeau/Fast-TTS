@@ -8,7 +8,7 @@ import torch.nn.functional as F
 from einops import rearrange, repeat
 from torch import nn, einsum
 
-import tortoise.utils.torch_intermediary as ml
+import fast_tts.tortoise.utils.torch_intermediary as ml
 
 DEFAULT_DIM_HEAD = 64
 

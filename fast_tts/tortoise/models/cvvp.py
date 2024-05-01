@@ -3,10 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch import einsum
 
-from tortoise.models.arch_util import AttentionBlock
-from tortoise.models.xtransformers import ContinuousTransformerWrapper, Encoder
+from fast_tts.tortoise.models.arch_util import AttentionBlock
+from fast_tts.tortoise.models.xtransformers import ContinuousTransformerWrapper, Encoder
 
-import tortoise.utils.torch_intermediary as ml
+import fast_tts.tortoise.utils.torch_intermediary as ml
 
 def exists(val):
     return val is not None

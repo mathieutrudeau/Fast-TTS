@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
 
-from tortoise.models.arch_util import Upsample, Downsample, normalization, zero_module, AttentionBlock
+from fast_tts.tortoise.models.arch_util import Upsample, Downsample, normalization, zero_module, AttentionBlock
 
-import tortoise.utils.torch_intermediary as ml
+import fast_tts.tortoise.utils.torch_intermediary as ml
 
 class ResBlock(nn.Module):
     def __init__(

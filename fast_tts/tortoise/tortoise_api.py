@@ -1,6 +1,6 @@
-from tortoise.api_fast import TextToSpeech as Tortoise_TTS_Hifi
-from tortoise.utils.text import split_and_recombine_text
-from tortoise.utils.audio import load_audio,load_voice
+from fast_tts.tortoise.api_fast import TextToSpeech as Tortoise_TTS_Hifi
+from fast_tts.tortoise.utils.text import split_and_recombine_text
+from fast_tts.tortoise.utils.audio import load_audio,load_voice
 
 from huggingface_hub import hf_hub_download
 import os

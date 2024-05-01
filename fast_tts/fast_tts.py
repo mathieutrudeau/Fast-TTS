@@ -1,6 +1,6 @@
 import os
-import tortoise.tortoise_api as tortoise
-import rvc.rvc_api as rvc
+import fast_tts.tortoise.tortoise_api as tortoise
+import fast_tts.rvc.rvc_api as rvc
 
 class FastTTS:
 

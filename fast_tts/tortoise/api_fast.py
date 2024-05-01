@@ -6,19 +6,19 @@ from urllib import request
 import torch
 import torch.nn.functional as F
 import torchaudio
-from tortoise.models.classifier import AudioMiniEncoderWithClassifierHead
-from tortoise.models.autoregressive import UnifiedVoice
+from fast_tts.tortoise.models.classifier import AudioMiniEncoderWithClassifierHead
+from fast_tts.tortoise.models.autoregressive import UnifiedVoice
 from tqdm import tqdm
-from tortoise.models.arch_util import TorchMelSpectrogram
-from tortoise.models.hifigan_decoder import HifiganGenerator
-from tortoise.models.random_latent_generator import RandomLatentConverter
-from tortoise.utils.audio import denormalize_tacotron_mel
-from tortoise.utils.diffusion import SpacedDiffusion, space_timesteps, get_named_beta_schedule
-from tortoise.utils.tokenizer import VoiceBpeTokenizer
-from tortoise.utils.wav2vec_alignment import Wav2VecAlignment
-# from tortoise.models.stream_generator import init_stream_support
+from fast_tts.tortoise.models.arch_util import TorchMelSpectrogram
+from fast_tts.tortoise.models.hifigan_decoder import HifiganGenerator
+from fast_tts.tortoise.models.random_latent_generator import RandomLatentConverter
+from fast_tts.tortoise.utils.audio import denormalize_tacotron_mel
+from fast_tts.tortoise.utils.diffusion import SpacedDiffusion, space_timesteps, get_named_beta_schedule
+from fast_tts.tortoise.utils.tokenizer import VoiceBpeTokenizer
+from fast_tts.tortoise.utils.wav2vec_alignment import Wav2VecAlignment
+# from fast_tts.tortoise.models.stream_generator import init_stream_support
 
-from tortoise.utils.device import get_device_name, do_gc
+from fast_tts.tortoise.utils.device import get_device_name, do_gc
 
 pbar = None
 # init_stream_support()
@@ -136,7 +136,7 @@ def do_spectrogram_diffusion(diffusion_model, diffuser, latents, conditioning_la
 
 def classify_audio_clip(clip):
     """
-    Returns whether or not Tortoises' classifier thinks the given clip came from Tortoise.
+    Returns whether or not Tortoises' classifier thinks the given clip came from fast_tts.tortoise.
     :param clip: torch tensor containing audio waveform data (get it from load_audio)
     :return: True if the clip was classified as coming from Tortoise and false if it was classified as real.
     """

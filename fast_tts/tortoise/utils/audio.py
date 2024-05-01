@@ -6,7 +6,7 @@ import soundfile as sf
 import torch
 import torchaudio
 
-from tortoise.utils.stft import STFT
+from fast_tts.tortoise.utils.stft import STFT
 
 def get_voice_dir():
     target = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../voices')
